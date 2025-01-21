@@ -36,6 +36,7 @@ library(kableExtra)
 library(shinyFeedback)
 library(shinyAce)
 library(bslib)
+library(shinythemes)
 
 ################################################################################
 # Define UI layout
@@ -60,15 +61,16 @@ ui <- fluidPage(
   
   # Open navbarPage for main headings
   navbarPage(
-    tags$p("ReDiag", style = "color:#003399"),
+    id = "navbar",
+    #tags$p("ReDiag", style = "color:#003399"),
+    title = "ReDiag",
+    theme = shinytheme("flatly"),
     # Open the Home tabPanel
     tabPanel(
       tags$p("Home", style = "color:#FF6600"),
       sidebarLayout(
         sidebarPanel(
           width = 4,
-          # img(src = "vub_square_rgb.jpg", width = 420, height = 100),
-          # br(),
           img(src = "logo_bisi_rgb.jpg", width = 420, height = 100),
           br(),
         ), # End Home sidebarPanel
@@ -91,13 +93,26 @@ ui <- fluidPage(
           br(), br(),
           br(), br(),
           # tags$h4("Note: This is not the final version of the app. It is still under development!", style = "color:#FF0000"),
-          br(), br(),
-          tags$hr(),
-          tags$h6(em("Copyright 2024, Support for Quantitative and Qualitative Research, Version 01.03.24"), align = "center"),
-          br()
+          # br(), br(),
+          # tags$hr(),
+          # tags$h6(em("Copyright 2024, Support for Quantitative and Qualitative Research, Version 20.12.24"), align = "center"),
+          # br()
         ) # End Home mainPanel
         # position = "right"
-      ) # End Home sidebarLayout
+      ),
+      absolutePanel(
+        bottom = 10,
+        left = 0,
+        right = 0,
+        height = "auto",
+        fixed = TRUE,
+        tags$div(
+          style = "text-align: left; width: 100%; padding: 10px;",
+          tags$h6(
+            em("Copyright 2024, Support for Quantitative and Qualitative Research, Version 20.12.24")
+          )
+        )
+      )# End Home sidebarLayout
     ), # Close the Home tabPanel
 
     ############################################################################
@@ -573,6 +588,7 @@ ui <- fluidPage(
         tags$p("There is also an option to save the R Code for the plots generated from the study to reproduce the analysis or recreate the results. Users can then edit the code and interact with the objects stored in your environment during your analysis in RStudio."),
         br(),
         tags$h4("Note"),
+        tags$p("A tutorial of a basic example can be found as a PDF file in the", tags$a(href = "https://github.com/vub-square/ReDiag-Shiny-app/", "GitHub"), "folder."),
         tags$p("At any stage of the analysis, users can refresh and start a new session by clicking the", strong("Reset"), "button."),
         br(),
         br(),
@@ -613,7 +629,8 @@ ui <- fluidPage(
         )
       )
     ),
-    position = "fixed-top", tags$style(type = "text/css", "body {padding-top: 70px;}") # Close the Contact tabPanel
+    position = c("fixed-top"),
+    tags$style(type = "text/css", "body{padding-top: 90px;}")
   ) # Close navbarPage for main headings
 ) # Close fluidPage
 
